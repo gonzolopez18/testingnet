@@ -3,9 +3,9 @@ namespace Common.Model
 {
     public class PlayableGame
     {
-        public PlayableGame()
-        {
-        }
+        private List<Player> players = new List<Player>();
+        public List<Player> Players { get; set; }
+
     }
 }
 

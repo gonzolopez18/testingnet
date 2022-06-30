@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Common.Interfaces.Business;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -11,11 +12,19 @@ namespace testingnet.Controllers
     [Route("api/[controller]")]
     public class RandomGame : Controller
     {
+        private IRandomManager randomManager;
+
+        public RandomGame(IRandomManager randomManager)
+        {
+            this.randomManager = randomManager ?? throw new ArgumentNullException(nameof(randomManager));
+        }
+
+
         // GET: api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<RandomGame> Get()
         {
-            return new string[] { "value1", "value2" };
+            return (IEnumerable<RandomGame>)randomManager.GetRandomGames();
         }
 
         // GET api/values/5
